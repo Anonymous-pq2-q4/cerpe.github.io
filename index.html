@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="CERPE: Communication-Efficient Relative Pose Estimation with Vision Foundation Models for Ephemeral Collaborative Perception">
-  <meta name="keywords" content="CERPE, Collaborative Perception, Relative Pose Estimation, Vision Foundation Models, Multi-Robot Systems">
+        content="CERPE Real World Experiment Supplementary Material: Formation control experiments with physical robot teams.">
+  <meta name="keywords" content="CERPE, Collaborative Perception, Multi-Robot Formation, Real World Experiments">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CERPE: Communication-Efficient Relative Pose Estimation for Ephemeral Collaborative Perception</title>
+  <title>CERPE Real World Experiment Supplementary Material</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -53,47 +53,13 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Communication-Efficient Relative Pose Estimation with Vision Foundation Models for Ephemeral Collaborative Perception</h1>
+          <h1 class="title is-1 publication-title">CERPE Real World Experiment Supplementary Material</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">Anonymous Authors</span>
           </div>
           <div class="is-size-5 publication-authors">
             <span class="author-block">Paper-ID 3956</span>
           </div>
-
-          <!--
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code (Coming Soon)</span>
-                  </a>
-              </span>
-            </div>
-          </div>
-          -->
         </div>
       </div>
     </div>
@@ -111,181 +77,75 @@
   </div>
 </section>
 
-<!-- Teaser Figure -->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <img src="./static/images/motivation.jpg" alt="CERPE motivation figure" width="100%">
-      <h2 class="subtitle has-text-centered">
-        <b>CERPE</b> enables communication-efficient relative pose estimation for connected autonomous vehicles
-        encountering each other at urban intersections, handling intermittent visual overlap and limited bandwidth.
-      </h2>
-    </div>
-  </div>
-</section>
 
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Relative pose estimation is a fundamental capability for collaborative perception and coordination in multi-robot systems. However, robots encountering each other in real-world environments often operate in short interaction windows and must operate under limited communication bandwidth with intermittent or missing visual overlap caused by occlusions or limited fields of view.
-            Existing approaches typically rely on global reference frames, assume sustained view overlap, or incur prohibitive communication costs, thereby limiting their applicability to ephemeral collaborative perception.
-          </p>
-          <p>
-            To address these challenges, we introduce <b>communication-efficient relative pose estimation</b> (<b>CERPE</b>) that integrates vision foundation models to jointly estimate ego-motion and inter-robot relative pose.
-            Communication efficiency is achieved by decoupling overlap detection from pose estimation, using compact descriptors for continuous inter-robot communication and selectively exchanging key raw observations only during overlapping encounters.
-            Non-overlapping encounters are handled by propagating inter-robot relative poses through metrically scaled ego-motion, thus maintaining relative pose estimates even in the absence of visual overlap.
-          </p>
-          <p>
-            Experiments in simulation and real-world robots demonstrate that CERPE achieves robust 6-DoF pose estimation in ephemeral collaborative perception.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-  </div>
-</section>
-
-
-<!-- Method Overview -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Method Overview</h2>
-        <div class="content has-text-justified">
-          <p>
-            CERPE restructures vision foundation models to jointly estimate metrically scaled ego-motion and inter-robot relative poses under communication constraints.
-            Each robot encodes its observations into compressed visual descriptors using SALAD and continuously shares them to detect visual overlap.
-            When overlap is detected, raw observations are selectively exchanged, and VGGT estimates the inter-robot relative pose.
-            To resolve monocular scale ambiguity, we align predicted depth with metric depth from Metric3Dv2.
-            During non-overlapping periods, relative poses are propagated using metrically scaled ego-motion.
-          </p>
-        </div>
-        <img src="./static/images/approach.jpg" alt="CERPE method overview" width="100%">
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- Results -->
+<!-- Overview -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Experimental Results</h2>
-
+        <h2 class="title is-3">Overview</h2>
         <div class="content has-text-justified">
           <p>
-            We evaluate CERPE across three settings: (1) a high-fidelity CARLA simulation with 71 encounter scenarios, (2) real-world connected autonomous driving trials from OpenMars, and (3) physical robot teams with 3 Agilex Limo Pro robots.
+            This page provides supplementary details for the real-world experiments presented in the paper.
+            To validate the reliability of CERPE in a closed-loop setting, we designed a <b>multi-robot formation control</b> experiment:
+            a leader robot is teleoperated via keyboard, while follower robots autonomously maintain a fixed relative pose to the leader using only CERPE's pose estimates.
           </p>
         </div>
-
-        <!-- Results Table -->
-        <div class="content">
-          <h3 class="title is-4">Quantitative Comparison</h3>
-          <table class="table is-fullwidth three-line-table">
-            <thead>
-              <tr class="top-rule">
-                <th rowspan="2">Method</th>
-                <th colspan="3" class="has-text-centered">CAD Simulation</th>
-                <th colspan="3" class="has-text-centered">Real-world CAD</th>
-                <th colspan="3" class="has-text-centered">Physical Robot Teams</th>
-              </tr>
-              <tr class="mid-rule">
-                <th>e<sub>pos</sub> (m)</th>
-                <th>e<sub>rot</sub> (rad)</th>
-                <th>Succ. (%)</th>
-                <th>e<sub>pos</sub> (m)</th>
-                <th>e<sub>rot</sub> (rad)</th>
-                <th>Succ. (%)</th>
-                <th>e<sub>pos</sub> (m)</th>
-                <th>e<sub>rot</sub> (rad)</th>
-                <th>Succ. (%)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>SuperGlue</td>
-                <td>16.00*</td><td>0.895</td><td>77.5</td>
-                <td>7.62*</td><td>0.169</td><td>93.7</td>
-                <td>0.12*</td><td>0.165</td><td>98.4</td>
-              </tr>
-              <tr>
-                <td>NOPE</td>
-                <td>9.41</td><td>0.776</td><td>33.4</td>
-                <td>39.41</td><td>1.682</td><td>45.0</td>
-                <td>---</td><td>---</td><td>---</td>
-              </tr>
-              <tr>
-                <td>Co-VisNet</td>
-                <td>16.22</td><td>0.906</td><td>100</td>
-                <td>29.95</td><td>0.271</td><td>100</td>
-                <td>0.88</td><td>0.257</td><td>100</td>
-              </tr>
-              <tr class="ours-separator">
-                <td><b>CERPE w/o EM</b></td>
-                <td><b>5.03 / 3.51</b>*</td><td><u>0.128</u></td><td>100</td>
-                <td><u>10.27 / 5.84</u>*</td><td><u>0.063</u></td><td>100</td>
-                <td><b>0.45 / 0.09</b>*</td><td><u>0.096</u></td><td>100</td>
-              </tr>
-              <tr>
-                <td><b>CERPE</b></td>
-                <td><u>8.66 / 5.06</u>*</td><td><b>0.089</b></td><td>100</td>
-                <td><b>8.26 / 2.94</b>*</td><td><b>0.063</b></td><td>100</td>
-                <td><u>0.54 / 0.11</u>*</td><td><b>0.086</b></td><td>100</td>
-              </tr>
-            </tbody>
-          </table>
-          <p class="is-size-7">
-            * Translation with ground-truth scale. For CERPE, both predicted and GT-scale translations are shown (pred. / GT).
-          </p>
-        </div>
-
-        <!-- Qualitative Results -->
-        <h3 class="title is-4">Qualitative Results</h3>
-
-        <div class="columns is-centered">
-          <div class="column">
-            <div class="content">
-              <h4 class="title is-5">CAD Simulation (CARLA)</h4>
-              <img src="./static/images/carla_quali.jpg" alt="Qualitative results on CARLA simulation" width="100%">
-            </div>
-          </div>
-          <div class="column">
-            <div class="content">
-              <h4 class="title is-5">Real-world CAD (OpenMars)</h4>
-              <img src="./static/images/mars_quali.jpg" alt="Qualitative results on OpenMars" width="100%">
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
 </section>
 
 
-<!-- Physical Robot Teams -->
+<!-- Hardware Setup -->
 <section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
+    <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Physical Robot Teams</h2>
+        <h2 class="title is-3">Hardware Setup</h2>
         <div class="content has-text-justified">
           <p>
-            We validate CERPE on physical robot teams consisting of 3 Agilex Limo Pro robots
-            across 13 indoor scenarios with 382 pairwise image pairs. CERPE runs in 438ms for 2 robots
-            and 780ms for 3 robots, demonstrating real-time capability.
+            We conduct experiments with teams of <b>3</b> and <b>5</b> Agilex Limo Pro robots in indoor environments.
+            All onboard RGB and depth images are transmitted to a centralized laptop (as described in the paper) via <b>TCP</b> with image compression.
+            The per-robot communication bandwidth is approximately <b>60 KB</b> per transmission.
+            Onboard depth sensors provide metric depth for scale recovery, replacing the Metric3Dv2 model used in simulation.
           </p>
         </div>
-        <img src="./static/images/physical_robot_team.jpg" alt="Physical robot team experiments" width="100%">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Hierarchical Control Pipeline -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Hierarchical Control Pipeline</h2>
+        <div class="content has-text-justified">
+          <p>
+            We employ a <b>two-level hierarchical control</b> architecture to bridge CERPE's perception output with robot actuation:
+          </p>
+          <ul>
+            <li>
+              <b>High-level (1.5&ndash;4 Hz):</b> CERPE takes RGB images from all robots and estimates the relative poses between the leader and each follower. From these estimates, each follower's goal position is computed. The inference latency scales with the number of robots: <b>250 ms</b> (2 robots), <b>370 ms</b> (3 robots), and <b>620 ms</b> (5 robots).
+            </li>
+            <li>
+              <b>Low-level (15&ndash;30 Hz):</b> Each follower interpolates the goal position from CERPE and tracks it using an <b>MPC controller</b> with a bicycle kinematic model. Between CERPE updates, pose is maintained via wheel odometry.
+            </li>
+          </ul>
+        </div>
+        <div class="has-text-centered">
+          <img src="./static/images/real_robot_pipeline.jpg" alt="Hierarchical control pipeline" style="max-width: 500px; width: 100%;">
+        </div>
+
+        <div class="content has-text-justified" style="margin-top: 1rem;">
+          <p>
+            The CERPE inference latency is <b>250 ms</b> (2 robots), <b>370 ms</b> (3 robots), and <b>620 ms</b> (5 robots), corresponding to an effective high-level control rate of approximately 1.5&ndash;4 Hz.
+          </p>
+        </div>
+
       </div>
     </div>
   </div>
